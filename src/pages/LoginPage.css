@@ -1,0 +1,72 @@
+/* src/pages/LoginPage.css */
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* CAMBIO: Usamos 100vh para que ocupe la pantalla, pero el scroll lo maneja el body */
+  min-height: 100vh; 
+  padding: 20px;
+  width: 100%; /* Asegura que ocupe el ancho disponible */
+}
+
+.login-card {
+  background: var(--card-bg);
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 450px;
+  text-align: center;
+}
+
+.login-card h2 {
+  margin-top: 0;
+  font-size: 1.75rem;
+  color: var(--text-dark);
+}
+
+.login-form .form-group {
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.login-form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--text-light);
+}
+
+.login-form input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 0.85rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: white;
+  background: var(--electric-blue-gradient);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.login-btn:hover {
+  opacity: 0.9;
+  box-shadow: 0 6px 15px rgba(67, 100, 247, 0.3);
+}
+
+.login-error {
+  color: #D32F2F;
+  margin-top: 1.5rem;
+  font-weight: 500;
+}

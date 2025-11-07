@@ -1,0 +1,84 @@
+/* src/components/ConfirmModal.css */
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* --- ¡AQUÍ ESTÁ EL CAMBIO! --- */
+  z-index: 10000; /* Un valor muy alto para estar encima de todo */
+  backdrop-filter: blur(5px);
+}
+
+.modal-card {
+  background: var(--card-bg);
+  border-radius: var(--card-radius);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  padding: 1.5rem 2rem;
+  width: 100%;
+  max-width: 450px;
+  border-top: 4px solid var(--primary-blue);
+  animation: modal-fade-in 0.2s ease-out;
+}
+
+@keyframes modal-fade-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.modal-card h3 {
+  margin-top: 0;
+  font-size: 1.5rem;
+  color: var(--text-dark);
+}
+
+.modal-content {
+  margin-bottom: 1.5rem;
+  color: var(--text-light);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.modal-actions button {
+  padding: 0.6rem 1.25rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+}
+
+.modal-btn-confirm {
+  background: var(--primary-blue);
+  color: white;
+}
+.modal-btn-confirm:hover {
+  opacity: 0.85;
+}
+
+.modal-btn-cancel {
+  background: #f0f0f0;
+  color: var(--text-light);
+  border: 1px solid #ddd;
+}
+.modal-btn-cancel:hover {
+  background-color: #e0e0e0;
+}

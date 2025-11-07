@@ -1,0 +1,113 @@
+/* src/components/StopItem.css */
+
+.stop-item {
+  background: var(--card-bg);
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+  cursor: pointer;
+  border: 1px solid #eee;
+  border-left: 5px solid #ccc;
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.stop-item-content {
+  flex-grow: 1;
+}
+
+.stop-item:hover:not(.selected) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+.stop-item.selected {
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 10px 2px rgba(67, 100, 247, 0.3);
+  transform: scale(1.02);
+}
+
+/* --- NUEVO: Estilo para la tarjeta en modo edición --- */
+.stop-item.is-editing {
+  border-color: var(--primary-blue);
+  background-color: #f0f5ff; /* Un azul muy claro */
+}
+
+/* (El resto de los estilos de color [data-status] siguen igual) */
+.stop-item[data-status="RED"] { 
+  background-color: var(--color-red-bg); 
+  border-left-color: var(--color-red-text);
+}
+.stop-item[data-status="YELLOW"] { 
+  background-color: var(--color-yellow-bg); 
+  border-left-color: var(--color-yellow-text);
+}
+.stop-item[data-status="GREEN"] { 
+  background-color: var(--color-green-bg); 
+  border-left-color: var(--color-green-text);
+}
+.stop-item.is-editing[data-status="RED"],
+.stop-item.is-editing[data-status="YELLOW"],
+.stop-item.is-editing[data-status="GREEN"] {
+    background-color: #f0f5ff; /* Sobrescribe el color de fondo */
+}
+
+
+.stop-item h4 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+.stop-item p {
+  margin: 0.15rem 0;
+  color: var(--text-light);
+  font-size: 0.85rem;
+}
+.stop-item p strong {
+  color: var(--text-dark);
+  font-weight: 600;
+}
+[data-status="RED"] { color: var(--color-red-text); }
+[data-status="YELLOW"] { color: var(--color-yellow-text); }
+[data-status="GREEN"] { color: var(--color-green-text); }
+
+/* --- Estilos para los botones de acción (simplificado) --- */
+.stop-item-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex-shrink: 0;
+  margin-left: 1rem;
+}
+
+.stop-item-actions button {
+  padding: 0.5rem 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+/* Botón de Editar (Azul) */
+.edit-btn {
+  background-color: var(--primary-blue);
+  color: white;
+  border-color: var(--primary-blue);
+}
+.edit-btn:hover {
+  background-color: #3a56cf;
+}
+
+/* Botón de Cancelar (Gris) */
+.cancel-btn {
+  background-color: #f0f0f0;
+  color: var(--text-light);
+  border-color: #ddd;
+}
+.cancel-btn:hover {
+  background-color: #e0e0e0;
+}

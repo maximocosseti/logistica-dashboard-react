@@ -1,0 +1,115 @@
+/* src/pages/AdminPage.css */
+
+.admin-page {
+  padding: 1.5rem 2rem;
+  max-width: 1200px;
+  margin: 1.5rem auto;
+  background-color: var(--background-grey);
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  color: var(--text-dark);
+}
+
+.admin-header {
+  background: var(--electric-blue-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  margin: 0 0 1.5rem 0;
+  font-size: 2rem;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 1rem;
+}
+
+/* Estilo para los formularios */
+.admin-form {
+  background: var(--card-bg);
+  border-radius: var(--card-radius);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  padding: 1.5rem 2rem;
+  margin-bottom: 2rem;
+  border-top: 3px solid var(--primary-blue);
+}
+
+.admin-form h3 {
+  margin-top: 0;
+  font-size: 1.4rem;
+  color: var(--text-dark);
+}
+
+.admin-form h4 {
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+  color: var(--primary-blue);
+}
+
+/* --- NUEVO: Grid para el formulario de paradas --- */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 columnas */
+  gap: 1rem 1.5rem; /* Espacio vertical y horizontal */
+}
+
+/* --- NUEVO: Divisor --- */
+.form-divider {
+  border: none;
+  border-top: 1px solid #eee;
+  margin: 2rem 0;
+}
+
+.form-group {
+  margin-bottom: 0; /* Ya tenemos gap en el grid */
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--text-light);
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.form-btn {
+  padding: 0.75rem 1.5rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: white;
+  background: var(--primary-blue);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 1rem; /* Espacio sobre el botón */
+}
+
+.form-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.form-btn:hover:not(:disabled) {
+  opacity: 0.9;
+  box-shadow: 0 4px 12px rgba(67, 100, 247, 0.2);
+}
+
+.form-message {
+  margin-top: 1rem;
+  font-weight: 500;
+}
+.form-message.success {
+  color: var(--color-green-text);
+}
+.form-message.error {
+  color: var(--color-red-text);
+}

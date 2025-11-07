@@ -1,0 +1,104 @@
+/* src/pages/DashboardPage.css */
+
+.dashboard-page {
+  padding: 1.5rem;
+  width: calc(100% - 3rem);
+  max-width: 1800px;
+  margin: 1.5rem auto; 
+  background-color: var(--background-grey); 
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 3rem); 
+  overflow: hidden; /* ¡Correcto! La tarjeta principal NO debe tener scroll */
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+  flex-shrink: 0;
+}
+
+.dashboard-header h2 {
+  margin: 0;
+  font-size: 2rem;
+  background: var(--electric-blue-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+.logout-btn {
+  padding: 0.6rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: white;
+  background: var(--primary-blue);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.logout-btn:hover {
+  opacity: 0.9;
+  box-shadow: 0 4px 12px rgba(67, 100, 247, 0.2);
+}
+
+/* --- ESTE ES EL BLOQUE CORREGIDO --- */
+.dashboard-content {
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+  flex-grow: 1;
+  
+  /* 1. Quitamos 'overflow: hidden' para que no corte el scroll de su hijo */
+  /* overflow: hidden; */ 
+  
+  /* 2. Añadimos 'min-height: 0' para arreglar el bug de cálculo de altura de flex */
+  min-height: 0; 
+}
+/* ---------------------------------- */
+
+.stops-list-column {
+  flex: 1; 
+  /* ¡CLAVE! Habilita el scroll vertical SÓLO para esta columna */
+  overflow-y: auto; 
+  padding-right: 10px; 
+  /* --- CAMBIO: Eliminamos 'height: 100%' --- */
+}
+
+.stops-list-column h3, .map-column h3 {
+  background: var(--electric-blue-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+
+.map-column {
+  flex: 1.5; 
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* El mapa SÍ debe estar contenido */
+  /* --- CAMBIO: Eliminamos 'height: 100%' --- */
+}
+
+.error-message {
+  color: #D32F2F;
+  font-weight: 500;
+  font-size: 1.2rem;
+  text-align: center;
+  margin: 2rem 0;
+}

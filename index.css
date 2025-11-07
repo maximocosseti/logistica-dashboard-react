@@ -1,0 +1,42 @@
+/* src/index.css */
+
+:root {
+  /* Tu gradiente azul eléctrico, más oscuro para el fondo */
+  --electric-blue-gradient: linear-gradient(135deg, #004D99, #003366); /* Azul más profundo */
+  --primary-blue: #4364F7; /* Azul para acciones y detalles */
+  --light-blue: #6FB1FC; /* Azul más claro si es necesario */
+  
+  /* Colores de semáforo VIVOS (Estilo Alerta Fuerte) */
+  --color-red-bg: #FEE2E2;     /* Fondo rojo pastel */
+  --color-red-text: #DC2626;   /* Texto/Borde rojo oscuro */
+
+  --color-yellow-bg: #FEF9C3;  /* Fondo amarillo pastel */
+  --color-yellow-text: #B45309; /* Texto/Borde ámbar oscuro */
+
+  --color-green-bg: #D1FAE5;   /* Fondo verde pastel */
+  --color-green-text: #047857;  /* Texto/Borde verde oscuro */
+  
+  --card-bg: #ffffff;
+  --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra más pronunciada */
+  --card-radius: 12px;
+  
+  --text-dark: #222;
+  --text-light: #555;
+  --background-grey: #f0f2f5; /* Un gris muy sutil para el fondo interno */
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background: var(--electric-blue-gradient); 
+  color: var(--text-dark);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  overflow-y: auto; 
+}
+
+* {
+  box-sizing: border-box;
+}
