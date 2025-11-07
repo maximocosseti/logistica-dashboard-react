@@ -1,16 +1,61 @@
-# React + Vite
+#  Dashboard de Validación Logística (React & Vite)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este repositorio contiene el **frontend (Dashboard)** del proyecto de Validación Logística. Es una Aplicación de Página Única (SPA) construida con React, diseñada para consumir la API de FastAPI y proveer una interfaz de usuario limpia para los repartidores y administradores.
 
-Currently, two official plugins are available:
+La interfaz permite a los repartidores visualizar sus paradas asignadas en una lista (con un semáforo de colores) y en un mapa interactivo (Leaflet), identificando rápidamente paradas problemáticas (marcadas en ROJO o AMARILLO).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+La característica principal es el **"bucle de retroalimentación"**, que permite al repartidor entrar en un "modo de edición" para corregir la ubicación GPS de una parada directamente haciendo clic en el mapa.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 📋 Características Principales
 
-## Expanding the ESLint configuration
+* **Framework Moderno:** Construido con **Vite** para un desarrollo ultra-rápido.
+* **Enrutamiento (Routing):** Usa `react-router-dom` para manejar las vistas de la aplicación.
+* **Gestión de Estado Global:** `React Context` para manejar la autenticación (token y datos del usuario) en toda la app.
+* **Rutas Protegidas:**
+    * `ProtectedRoute`: Protege el dashboard (`/`) y redirige a `/login` si no hay token.
+    * `AdminRoute`: Protege (`/admin`) y redirige si el usuario no tiene el rol de `admin`.
+* **Interfaz de Mapa Interactiva:**
+    * Renderiza paradas en un mapa real usando **React-Leaflet**.
+    * Permite hacer clic en la lista para volar (`flyTo`) al pin correspondiente.
+    * **Modo Edición (Click-to-Update):** Permite reubicar una parada haciendo clic en el mapa, que llama al endpoint `PATCH` del backend.
+* **Lógica de UI:**
+    * Renderiza las paradas con un código de colores (Rojo/Amarillo/Verde) basado en el `validation_status` de la API.
+    * Muestra notificaciones y modales de confirmación para una mejor UX.
+* **Consumo de API:** Usa `axios` con *interceptors* para adjuntar automáticamente el token JWT a todas las peticiones protegidas.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 💻 Stack Tecnológico
+
+* **React 18** (con Vite)
+* **React Router v6** (para enrutamiento)
+* **React Context** (para gestión de estado)
+* **Axios** (para peticiones a la API)
+* **React-Leaflet** & **Leaflet** (para el mapa)
+* **CSS Moderno** (Flexbox, Grid, y variables CSS)
+
+---
+
+## 📦 Instalación y Ejecución
+
+1.  **Requisito Previo:** Asegúrate de que el [Backend API](https://github.com/maximocosseti/proyecto-logistica) esté instalado y corriendo en `http://127.0.0.1:8000`.
+
+2.  **Clonar el repositorio:**
+    ```bash
+    # (Asegúrate de poner la URL de tu repo frontend)
+    git clone [https://github.com/tu-usuario/logistica-dashboard-react.git](https://github.com/tu-usuario/logistica-dashboard-react.git)
+    cd logistica-dashboard-react
+    ```
+
+3.  **Instalar dependencias:**
+    ```bash
+    npm install
+    ```
+
+4.  **Ejecutar el servidor de desarrollo:**
+    ```bash
+    npm run dev
+    ```
+    * El frontend estará disponible en `http://localhost:5173` (o el puerto que indique Vite).
