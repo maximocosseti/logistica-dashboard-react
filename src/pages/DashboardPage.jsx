@@ -2,12 +2,16 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../hooks/useAuth';
 import apiClient from '../services/api';
+
+// --- 1. Importaciones corregidas ---
+import { useParams, Link } from 'react-router-dom';
+
 import MapComponent from '../components/MapComponent';
 import StopItem from '../components/StopItem';
-import ConfirmModal from '../components/ConfirmModal'; // <-- 1. Importar el Modal
+import ConfirmModal from '../components/ConfirmModal';
 import './DashboardPage.css';
 
-// ... (Componente Notification sin cambios) ...
+// Componente de Notificación (sin cambios)
 const Notification = ({ message, type = 'success' }) => {
   if (!message) return null;
   const backgroundStyle = () => {
@@ -37,23 +41,27 @@ function DashboardPage() {
   const [editingStopId, setEditingStopId] = useState(null); 
   const [selectedStop, setSelectedStop] = useState(null);
   const [notification, setNotification] = useState(null);
-
-  // --- 2. NUEVOS ESTADOS PARA EL MODAL ---
   const [modalOpen, setModalOpen] = useState(false);
-  // Almacena temporalmente los datos del clic
   const [draftLocation, setDraftLocation] = useState(null); 
 
-  // ... (useEffect de Carga inicial de datos sin cambios) ...
+  // --- 2. ID de ruta dinámico (en lugar de hardcodeado) ---
+  const { routeId } = useParams();
+
+  // --- 3. Carga de datos (useEffect corregido) ---
   useEffect(() => {
     const fetchStops = async () => {
-      const HARDCODED_ROUTE_ID = '690bd273e4d19706a37d8e48'; // <-- TU ID DE RUTA
-      if (HARDCODED_ROUTE_ID === 'PEGA_TU_ROUTE_ID_AQUI') {
-        setError('Error: Debes editar DashboardPage.jsx y poner un ID de ruta válido.');
-        setLoading(false); return;
+      // Usamos el 'routeId' de la URL
+      if (!routeId) {
+        setError('No se ha especificado un ID de ruta.');
+        setLoading(false);
+        return;
       }
+      
       try {
-        setLoading(true); setError(null);
-        const response = await apiClient.get(`/routes/${HARDCODED_ROUTE_ID}/stops`);
+        setLoading(true); 
+        setError(null);
+        // Usamos la variable 'routeId'
+        const response = await apiClient.get(`/routes/${routeId}/stops`);
         setStops(response.data);
       } catch (err) {
         console.error('Error al cargar las paradas:', err);
@@ -63,15 +71,16 @@ function DashboardPage() {
       }
     };
     fetchStops();
-  }, []);
+  }, [routeId]); // Se re-ejecuta si el routeId (de la URL) cambia
 
-  // ... (showNotification sin cambios) ...
+  
+  // --- Lógica de Handlers (sin cambios) ---
+
   const showNotification = (message, type = 'success', duration = 3000) => {
     setNotification({ message, type });
     setTimeout(() => { setNotification(null); }, duration);
   };
 
-  // --- 3. LÓGICA DE EDICIÓN MODIFICADA ---
   const handleEditClick = (stop) => {
     if (editingStopId === stop.id) {
       setEditingStopId(null);
@@ -83,28 +92,20 @@ function DashboardPage() {
     }
   };
 
-  // Se llama cuando el usuario HACE CLIC en el mapa
   const handleMapClick = (lat, lng) => {
-    if (!editingStopId) return; // No hacer nada si no estamos en modo edición
-
-    // Guardamos los datos del clic y ABRIMOS EL MODAL
+    if (!editingStopId) return;
     setDraftLocation({ lat, lng });
     setModalOpen(true);
   };
 
-  // Se llama si el usuario da "Cancelar" en el modal
   const handleModalCancel = () => {
     setModalOpen(false);
     setDraftLocation(null);
-    // Opcional: salir del modo edición al cancelar
-    // setEditingStopId(null); 
   };
   
-  // Se llama si el usuario da "Aceptar" en el modal
   const handleModalConfirm = async () => {
     if (!draftLocation || !editingStopId) return;
-    
-    setModalOpen(false); // Cierra el modal
+    setModalOpen(false); 
 
     const payload = {
       gps_lat_cliente: draftLocation.lat,
@@ -134,15 +135,15 @@ function DashboardPage() {
       console.error('Error al actualizar la ubicación:', err);
       showNotification("Error al guardar la ubicación.", 'error');
     } finally {
-      setEditingStopId(null); // Salimos del modo edición
+      setEditingStopId(null); 
       setDraftLocation(null);
     }
   };
 
-  // Prepara el contenido del modal
   const getModalContent = () => {
     if (!draftLocation || !editingStopId) return null;
     const stop = stops.find(s => s.id === editingStopId);
+    if (!stop) return null;
     return (
       <pre style={{ fontFamily: 'monospace', fontSize: '0.9rem' }}>
         {`Parada: ${stop.customer_name}\n`}
@@ -161,7 +162,6 @@ function DashboardPage() {
         type={notification?.type} 
       />
       
-      {/* --- 4. Renderizamos el Modal (está oculto por defecto) --- */}
       <ConfirmModal
         isOpen={modalOpen}
         onCancel={handleModalCancel}
@@ -171,8 +171,11 @@ function DashboardPage() {
         {getModalContent()}
       </ConfirmModal>
       
+      {/* --- 4. Encabezado corregido --- */}
       <header className="dashboard-header">
-        <h2>Dashboard de Validación</h2>
+        <Link to="/" className="back-link">
+          &larr; Volver a Mis Rutas
+        </Link>
         <button onClick={logout} className="logout-btn">
           Cerrar Sesión
         </button>
@@ -214,5 +217,16 @@ function DashboardPage() {
     </div>
   );
 }
+
+// 5. Estilo para el enlace "Volver"
+const linkStyle = document.createElement('style');
+linkStyle.innerHTML = `
+  .back-link {
+    font-size: 1rem; font-weight: 600; color: var(--primary-blue);
+    text-decoration: none; transition: all 0.2s ease;
+  }
+  .back-link:hover { text-decoration: underline; opacity: 0.8; }
+`;
+document.head.appendChild(linkStyle);
 
 export default DashboardPage;
