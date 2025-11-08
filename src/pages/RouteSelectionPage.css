@@ -1,0 +1,39 @@
+/* src/pages/RouteSelectionPage.css */
+.route-selection-container {
+  width: 100%; max-width: 900px; margin: 1.5rem auto; padding: 1.5rem 2rem;
+  background-color: var(--background-grey); border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow); color: var(--text-dark);
+}
+.route-selection-header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid #eee;
+}
+.route-selection-header h2 {
+  margin: 0; font-size: 2rem; background: var(--electric-blue-gradient);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text; color: transparent;
+}
+.logout-btn {
+  padding: 0.6rem 1rem; font-size: 0.9rem; font-weight: 600; color: white;
+  background: var(--primary-blue); border: none; border-radius: 8px;
+  cursor: pointer; transition: all 0.2s ease; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+.route-selection-card { padding: 1rem; }
+.route-selection-card h3 { margin-top: 0; font-size: 1.4rem; }
+.routes-list { display: flex; flex-direction: column; gap: 1rem; }
+.route-item-btn {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1.25rem 1.5rem; width: 100%; font-size: 1.1rem; font-weight: 600;
+  text-align: left; color: var(--text-dark); background: var(--card-bg);
+  border: 1px solid #ddd; border-radius: 8px; cursor: pointer;
+  transition: all 0.2s ease; box-shadow: var(--card-shadow);
+}
+.route-item-btn:hover {
+  border-color: var(--primary-blue); transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+.route-status {
+  font-size: 0.9rem; font-weight: 500; color: var(--text-light);
+  background-color: #f0f0f0; padding: 0.25rem 0.75rem; border-radius: 20px;
+}
+.error-message { color: #D32F2F; font-weight: 500; }
